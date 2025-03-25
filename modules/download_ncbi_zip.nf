@@ -11,4 +11,3 @@ process downloadNcbiZip {
     datasets download genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
     """
 }
-}
