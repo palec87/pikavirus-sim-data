@@ -1,12 +1,12 @@
 # pikavirus-sim-data
 Generate simulated data for pikavirus banchmarks
 
-Input is a csv file `species_input.csv` as below with ncbi accession ids and coverages of the desired simulated dataset.
+Input is a csv file `species_input.csv` as below with ncbi accession ids and relative abundance (has to sum to 1) of the desired simulated dataset.
 
-| accession | taxon | coverage |
+| accession | taxon | abundance |
 | --------- | ----- | ------- |
-| GCF_015277775.1 | acidobacteriota | 20 |
-| GCA_023169805.1 | abditibacteriota | 30 |
+| GCF_015277775.1 | acidobacteriota | 0.4 |
+| GCA_023169805.1 | abditibacteriota | 0.6 |
 
 The data will be downloaded from ncbi, unzipped, combined for adequate input for the InSilicoSeq. See [Parametrize](#parametrize) section for more.
 
