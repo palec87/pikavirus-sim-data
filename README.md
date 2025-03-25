@@ -3,12 +3,16 @@ Generate simulated data for pikavirus banchmarks
 
 Input is a csv file `species_input.csv` as below with ncbi accession ids and relative abundance (has to sum to 1) of the desired simulated dataset.
 
-| accession | taxon | abundance |
-| --------- | ----- | ------- |
-| GCF_015277775.1 | acidobacteriota | 0.4 |
-| GCA_023169805.1 | abditibacteriota | 0.6 |
+| accession | taxon | abundance | source |
+| --------- | ----- | ------- | --------|
+| GCF_015277775.1 | acidobacteriota | 0.4 | genome
+| GCA_023169805.1 | abditibacteriota | 0.6 | genome
 
 The data will be downloaded from ncbi, unzipped, combined for adequate input for the InSilicoSeq. See [Parametrize](#parametrize) section for more.
+
+- `source` allows you to get data from virus/genome/gene datasets
+- `abundance` controls relative abundance in your synthetic dataset
+- `taxon` is for user friendly overview of the composition
 
 ## Run
 Once you have the dependencies listed in the [Dependencies](#dependencies) section, you can run the workflow as:
