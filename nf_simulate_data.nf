@@ -1,7 +1,14 @@
-params.outdir = 'ncbi_data_example'
+params.outdir = 'sample1_1M_miseq'
 params.nReads = '1M'
 params.model = 'miseq'
-params.input = 'species_input_example.csv'
+params.input = 'species_pikavirus_sample1.csv'
+
+
+// this is to run the example
+// params.outdir = 'ncbi_data_example'
+// params.nReads = '10K'
+// params.model = 'miseq'
+// params.input = 'species_example.csv'
 
 include { downloadNcbiZip } from './modules/download_ncbi_zip.nf'
 include { unzipNCBI_cov } from './modules/unzip_ncbi_cov.nf'
@@ -13,7 +20,7 @@ process generate_data {
 
     input:
     path combined_fasta
-    path coverage_file
+    path abundance_file
 
     output:
     path "sim_data*"
@@ -24,7 +31,7 @@ process generate_data {
         --genomes ${combined_fasta} \\
         --n_reads ${params.nReads} \\
         --model ${params.model} \\
-        --coverage_file ${coverage_file} \\
+        --abundance_file ${abundance_file} \\
         --output sim_data \\
     """
 }
@@ -49,8 +56,8 @@ process saveLogs {
     """
 }
 
-workflow {
-    // def species_input = "species_input.csv"
+workflow get_data {
+    main:
     myFile = file("coverage.txt")
     ch_input = Channel.fromPath(params.input)
                             .splitCsv( header: true )
@@ -61,19 +68,25 @@ workflow {
 
     // unzip ncbi archives
     trigger = unzipNCBI_cov(downloadNcbiZip.out.archive, ch_input, myFile)
-        .collect(flat: false)
-        .flatMap()
-    
-    // from unzipped data to combined fasta
-    combineFastas("${projectDir}/${params.outdir}", trigger)
 
-    // from cobined fasta and coverage file to simulated data
-    generate_data(combineFastas.out.multifasta, myFile)
+    emit:
+    trigger
+    myFile
+}
+
+workflow {
+    get_data()
     input = Channel.fromPath(params.input)
                             .splitCsv( header: true )
                             .map { row -> [row.accession, row.taxon, row.abundance] }
                             .collect(flat: false)
-    // save metadata
-    saveLogs(trigger, input)
 
+    // from unzipped data to combined fasta
+    combineFastas("${projectDir}/${params.outdir}", get_data.out.trigger.collect())
+
+    // from cobined fasta and coverage file to simulated data
+    generate_data(combineFastas.out.multifasta, get_data.out.myFile)
+
+    // save metadata
+    saveLogs(get_data.out.trigger.collect(), input)
 }
