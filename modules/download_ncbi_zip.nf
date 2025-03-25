@@ -13,5 +13,6 @@ process downloadNcbiZip {
         datasets download virus genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
     else
         datasets download genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
+    fi
     """
 }
