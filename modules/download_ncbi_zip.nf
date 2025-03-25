@@ -1,6 +1,6 @@
 process downloadNcbiZip {
     input:
-    tuple val(accession_id), val(taxon), val(coverage)
+    tuple val(accession_id), val(taxon), val(coverage), val(source)
     
     output:
     path "${taxon}-${accession_id}.zip", emit: archive
@@ -8,6 +8,10 @@ process downloadNcbiZip {
     script:
     """
     echo "Downloading data from NCBI"
-    datasets download genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
+    # if else statement
+    if [ "${source}" == "virus" ]; then
+        datasets download virus genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
+    else
+        datasets download genome accession ${accession_id} --filename ${taxon}-${accession_id}.zip
     """
 }

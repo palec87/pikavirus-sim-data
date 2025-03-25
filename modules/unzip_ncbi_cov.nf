@@ -2,7 +2,7 @@ process unzipNCBI_cov {
     publishDir "${params.outdir}", mode: 'copy'
     input:
     path archive
-    tuple val(accession_id), val(taxon), val(coverage)
+    tuple val(accession_id), val(taxon), val(coverage), val(source)
     path file_name
     
     output:

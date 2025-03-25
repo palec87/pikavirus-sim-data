@@ -1,7 +1,7 @@
 params.outdir = 'sample1_1M_miseq'
 params.nReads = '1M'
 params.model = 'miseq'
-params.input = 'species_pikavirus_sample1.csv'
+params.input = 'species_pikavirus_sample1_fine.csv'
 
 
 // this is to run the example
@@ -61,7 +61,7 @@ workflow get_data {
     myFile = file("coverage.txt")
     ch_input = Channel.fromPath(params.input)
                             .splitCsv( header: true )
-                            .map { row -> [row.accession, row.taxon, row.abundance] }
+                            .map { row -> [row.accession, row.taxon, row.abundance, row.source] }
 
     // download ncbi archives
     downloadNcbiZip(ch_input)
@@ -78,7 +78,7 @@ workflow {
     get_data()
     input = Channel.fromPath(params.input)
                             .splitCsv( header: true )
-                            .map { row -> [row.accession, row.taxon, row.abundance] }
+                            .map { row -> [row.accession, row.taxon, row.abundance, row.source] }
                             .collect(flat: false)
 
     // from unzipped data to combined fasta
