@@ -3,17 +3,32 @@ Generate simulated data for pikavirus banchmarks
 
 Input is a csv file `species_input.csv` as below with ncbi accession ids and coverages of the desired simulated dataset.
 
-
-
 | accession | taxon | coverage |
 | --------- | ----- | ------- |
 | GCF_015277775.1 | acidobacteriota | 20 |
 | GCA_023169805.1 | abditibacteriota | 30 |
 
-The data will be downloaded from ncbi, unzipped, combined for adequate input for the InSilicoSeq.
+The data will be downloaded from ncbi, unzipped, combined for adequate input for the InSilicoSeq. See [Parametrize](#parametrize) section for more.
+
+## Run
+Once you have the dependencies listed in the [Dependencies](#dependencies) section, you can run the workflow as:
+```
+nextflow run nf_simulate_data.nf
+```
+
+## Parametrize
+parameter are
+* --outdir (default `ncbi_data_example`)
+* --nReads (default `1M`)
+* --model (default `miseq`, see InSilicoSeq for more options)
+* --input (default `species_input_example.csv`)
+
+You can change these defaults at the top of the `nf_simulate_data.nf` workflow file. 
 
 ## Example output
 folder `ncbi_data` contains both the downladed data and also the simulated `.fastq` files.
+
+There is also a log file which is located in `outdir/logs.txt` and records all the inputs to the workflow.
 
 ## Dependencies
 ```

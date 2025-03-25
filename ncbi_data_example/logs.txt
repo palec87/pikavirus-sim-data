@@ -1,0 +1,4 @@
+Output directory: ncbi_data_example
+Number of reads: 10K
+Model: miseq
+Input csv: [[GCF_015277775.1, acidobacteriota, 0.4], [GCA_023169805.1, abditibacteriota, 0.6]]
