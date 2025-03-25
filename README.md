@@ -10,7 +10,10 @@ Input is a csv file `species_input.csv` as below with ncbi accession ids and cov
 | GCF_015277775.1 | acidobacteriota | 20 |
 | GCA_023169805.1 | abditibacteriota | 30 |
 
-The data will be downloaded
+The data will be downloaded from ncbi, unzipped, combined for adequate input for the InSilicoSeq.
+
+## Example output
+folder `ncbi_data` contains both the downladed data and also the simulated `.fastq` files.
 
 ## Dependencies
 ```
