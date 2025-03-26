@@ -2,3 +2,4 @@ sandbox/
 work/
 .nextflow*
 sample1_1M_miseq/
+sample1_10K_miseq/

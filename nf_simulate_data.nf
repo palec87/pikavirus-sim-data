@@ -1,9 +1,9 @@
 params.outdir = 'sample1_10K_miseq'
 params.nReads = '10K'
 params.model = 'miseq'
-params.input = 'species_pikavirus_sample1_new.csv'
-params.abundance_file = "${projectDir}/abundance_sample1.txt"
-params.skip_download = true
+params.input = 'species_pikavirus_sample1.csv'
+params.abundance_file = "${projectDir}/abundance_pikavirus_sample1.txt"
+params.skip_download = false
 
 
 // this is to run the example
@@ -62,7 +62,6 @@ workflow get_data {
 
     emit:
     trigger
-    // myFile
 }
 
 workflow {
