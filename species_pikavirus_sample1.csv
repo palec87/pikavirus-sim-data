@@ -1,7 +1,7 @@
 accession,taxon,abundance,source
 GCF_000001405.39,Homo-sapiens,0.4,genome
 GCF_000002945.2,Schizosaccharomyces-pombe,0.1,gneome
-GCF_000146045.2,Saccharomyces-cerevisiae,0.05
+GCF_000146045.2,Saccharomyces-cerevisiae,0.05,genome
 GCF_000005845.2,Escherichia-coli-K-12-MG1655,0.1,genome
 GCF_000195955.2,Mycobacterium-tuberculosis-H37Rv,0.05,genome
 V00603.1,Influenza-A-virus-A-PR-8-34H1N1-mRNA-for-hypothetical-protein-strain-A-PR-8-34,0.02,virus
