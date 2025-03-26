@@ -1,4 +1,4 @@
-params.outdir = 'sample1_10K_miseq'
+params.outdir = 'sample1_miseq'
 params.nReads = '10K'
 params.model = 'miseq'
 params.input = 'species_pikavirus_sample1.csv'
@@ -23,6 +23,7 @@ process generate_data {
 
     input:
     path combined_fasta
+    path combined_human_fasta
 
     output:
     path "sim_data*"
@@ -30,7 +31,7 @@ process generate_data {
     script:
     """
     iss generate \\
-        --genomes ${combined_fasta} \\
+        --genomes ${combined_fasta} ${combined_human_fasta}\\
         --n_reads ${params.nReads} \\
         --model ${params.model} \\
         --abundance_file ${params.abundance_file} \\
@@ -75,7 +76,7 @@ workflow {
     combineFastas("${projectDir}/${params.outdir}", get_data.out.trigger.collect())
 
     // from cobined fasta and coverage file to simulated data
-    generate_data(combineFastas.out.multifasta)
+    generate_data(combineFastas.out.multifasta, "${projectDir}/combined-human.fna")
 
     // save metadata
     saveLogs(get_data.out.trigger.collect(), input)
