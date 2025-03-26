@@ -22,6 +22,7 @@ process combineFastas {
 
         # write fasta to combined file
         cat \$full_path >> combined-mulitfasta.fasta
+        echo "\n" >> combined-mulitfasta.fasta
 
     done
     """
