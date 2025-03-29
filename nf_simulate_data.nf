@@ -1,8 +1,8 @@
-params.outdir = 'sample1_miseq'
+params.outdir = 'sample3_miseq'
 params.nReads = '10K'
 params.model = 'miseq'
-params.input = 'species_pikavirus_sample1.csv'
-params.abundance_file = "${projectDir}/abundance_pikavirus_sample1.txt"
+params.input = 'species_pikavirus_sample3.csv'
+params.abundance_file = "${projectDir}/abundance_pikavirus_sample3.txt"
 params.skip_download = false
 
 
